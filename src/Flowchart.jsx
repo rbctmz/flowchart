@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './Flowchart.css';
 import { placeholderCover } from './assets/placeholder';
-
 // Импортируем обложки
 import catch22Cover from './covers/catch22.jpg';
 // import flowerscover from './covers/flowers.jpg'; // Добавляем импорт обложки
@@ -10,25 +9,24 @@ import catch22Cover from './covers/catch22.jpg';
 
 const Flowchart = () => {
   const [currentNode, setCurrentNode] = useState('start');
-  // Добавляем историю переходов
   const [history, setHistory] = useState([]);
 
-  // Добавляем эффект для обработки таймера
+  // Обновляем useEffect с правильными зависимостями
   useEffect(() => {
     const current = decisionTree[currentNode];
-    if (current.type === 'timer') {
+    if (current?.type === 'timer') {
       const timer = setTimeout(() => {
         goToNode(current.next);
       }, 3000);
       return () => clearTimeout(timer);
     }
-  }, [currentNode]); // Зависимость от currentNode
+  }, [currentNode]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Функция для перехода вперед
-  const goToNode = (nextNode) => {
-    setHistory([...history, currentNode]);
+  const goToNode = useCallback((nextNode) => {
+    setHistory(prev => [...prev, currentNode]);
     setCurrentNode(nextNode);
-  };
+  }, [currentNode]);
 
   // Функция для перехода назад
   const goBack = () => {
@@ -131,10 +129,6 @@ const Flowchart = () => {
       text: 'Ну, космические оперы это в общем-то фэнтези в космосе',
       next: 'dune'
     },
-    enderGame: {
-      type: 'result',
-      text: 'Орсон Скотт Кард - Игра Эндера (космос, дети, стратегия)'
-    },
     bookLength: {
       type: 'question',
       text: 'Две книги по 800 страниц или четыре по 400?',
@@ -231,11 +225,6 @@ const Flowchart = () => {
         { text: 'Не, космоса хватит', next: 'vampiresInSpace' }
       ]
     },
-    
-    watts: {
-      type: 'result',
-      text: 'Питер Уоттс - Ложная слепота (наука, космос, жёстко)'
-    },
     egan: {
       type: 'result',
       text: 'Диаспора',
@@ -278,10 +267,6 @@ const Flowchart = () => {
         { text: 'Нет', next: 'claustrophobia' }
       ]
     },
-    dickFlow: {
-      type: 'result',
-      text: 'Филип К. Дик - Помутнение (киберпанк на минималках)'
-    },
     claustrophobia: {
       type: 'question',
       text: 'Клаустрофобия вместо космоса?',
@@ -290,10 +275,6 @@ const Flowchart = () => {
         { text: 'Нет', next: 'postApocalypse' }
       ]
     },
-    wattsStarfish: {
-      type: 'result',
-      text: 'Питер Уоттс - Морские звёзды (научка под водой)'
-    },
     postApocalypse: {
       type: 'question',
       text: 'Мир после конца?',
@@ -301,10 +282,6 @@ const Flowchart = () => {
         { text: 'Валяй', next: 'orwell' },
         { text: 'Не, что-то другое', next: 'glassHalfFull' }
       ]
-    },
-    orwell: {
-      type: 'result',
-      text: 'Джордж Оруэлл - 1984 (Большой Брат следит)'
     },
     glassHalfFull: {
       type: 'question',
@@ -784,47 +761,6 @@ const Flowchart = () => {
         { text: 'Атмосфера', next: 'communicationOrDeath' }
       ]
     },
-
-    bookLength: {
-      type: 'question',
-      text: 'Две книги по 800 страниц или четыре по 400?',
-      options: [
-        { text: 'Две по 800', next: 'hyperion' },
-        { text: 'Четыре по 400', next: 'pandoraStar' },
-        { text: 'А покороче можно?', next: 'shorterBooks' }
-      ]
-    },
-
-    hyperion: {
-      type: 'result',
-      text: 'Гиперион',
-      author: 'Дэн Симмонс',
-      description: 'Эпическая космическая опера о семи паломниках, отправляющихся на загадочную планету Гиперион, где их ждет встреча с полумифическим Шрайком.',
-      cover: placeholderCover,
-      tags: ['космическая опера', 'научная фантастика', 'ворлдбилдинг'],
-      rating: 4.7,
-      yearPublished: 1989,
-      links: {
-        goodreads: 'https://www.goodreads.com/book/show/77566.Hyperion'
-      },
-      similarBooks: ['Падение Гипериона', 'Дюна', 'Основание']
-    },
-
-    pandoraStar: {
-      type: 'result',
-      text: 'Звезда Пандоры',
-      author: 'Питер Гамильтон',
-      description: 'Масштабная космическая опера о человечестве будущего, столкнувшемся с древней и могущественной угрозой из глубин космоса.',
-      cover: placeholderCover,
-      tags: ['космическая опера', 'научная фантастика', 'ворлдбилдинг'],
-      rating: 4.5,
-      yearPublished: 2004,
-      links: {
-        goodreads: 'https://www.goodreads.com/book/show/45252.Pandora_s_Star'
-      },
-      similarBooks: ['Иуда освобожденный', 'Гиперион', 'Пространство Откровения']
-    },
-
     communicationOrDeath: {
       type: 'question',
       text: 'Проблемы с коммуникацией или боязнь смерти?',
@@ -832,13 +768,11 @@ const Flowchart = () => {
         { text: 'Ого, внезапно.', next: 'whatTheHellTimer' }
       ]
     },
-
     whatTheHellTimer: {
       type: 'timer',
       text: 'Ну а хули. Итак?',
       next: 'deathFear'
     },
-
     deathFear: {
       type: 'question',
       text: 'Боязнь смерти?',
@@ -1002,7 +936,8 @@ const Flowchart = () => {
     </div>
   );
 
-  const current = decisionTree[currentNode];
+  // Добавим проверку на существование узла
+  const current = decisionTree[currentNode] || decisionTree['start'];
 
   // Обновляем обработчик кнопок в вопросах
   const handleOptionClick = (nextNode) => {
