@@ -76,7 +76,7 @@ vercel --prod
 
 ```json
 {
-  "homepage": "https://ваш-юзернейм.github.io/flowchart",
+  "homepage": "https://rbctmz.github.io/flowchart",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"

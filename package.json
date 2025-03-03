@@ -2,6 +2,11 @@
   "name": "flowchart",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://flowchart-cmx5va25x-gregkisels-projects.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rbctmz/flowchart.git"
+  },
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
@@ -16,7 +21,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "vercel --prod",
+    "deploy:dev": "vercel"
   },
   "eslintConfig": {
     "extends": [
