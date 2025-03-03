@@ -7,3 +7,21 @@
     color: #FF0000; /* Красный, как в flowchart’е */
     margin-bottom: 20px;
   }
+
+.attribution {
+  margin-top: 2rem;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.attribution a {
+  color: #1DA1F2;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.attribution a:hover {
+  color: #0c85d0;
+  text-decoration: underline;
+}
