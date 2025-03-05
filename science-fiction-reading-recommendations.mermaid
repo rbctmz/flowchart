@@ -1,0 +1,67 @@
+graph TD
+    Start["Start"] --> WantSciFi["So, you want to read science fiction?"]
+    WantSciFi -->|"Yes"| SciOrFantasy["Science fiction or fantasy?"]
+    WantSciFi -->|"No"| AlreadyRead["Have you already read something?"]
+    
+    SciOrFantasy -->|"Fantasy"| FantasyPath["Fantasy? Well, maybe..."]
+    SciOrFantasy -->|"Sci-Fi"| HardOrSoft["Hard sci-fi or soft sci-fi?"]
+    
+    FantasyPath -->|"No way"| MagicSwords["Do you like magic swords and medieval settings?"]
+    FantasyPath -->|"Yes"| Pratchett["Terry Pratchett - Discworld"]
+    
+    HardOrSoft -->|"Hard sci-fi"| SpaceOpera["Do you want space opera?"]
+    HardOrSoft -->|"Soft sci-fi"| LoveReading["Do you love reading?"]
+    
+    SpaceOpera -->|"Yes"| Asimov["Isaac Asimov - Foundation"]
+    SpaceOpera -->|"No"| WantFuture["Want stories about the future?"]
+    
+    LoveReading -->|"Yes"| TedChiang["Ted Chiang - Stories of Your Life"]
+    LoveReading -->|"No"| VirusSpace["What about VIRUSES... IN SPACE?"]
+    
+    MagicSwords -->|"Yes"| MartinMartin["George R.R. Martin - A Song of Ice and Fire"]
+    MagicSwords -->|"No"| DystopianNorms["Dystopian norms?"]
+    
+    DystopianNorms -->|"Yes"| Orwell["George Orwell - 1984"]
+    DystopianNorms -->|"No"| Cyberpunk["Are you a cyberpunk?"]
+    
+    Cyberpunk -->|"Yes"| Gibson["William Gibson - Neuromancer"]
+    Cyberpunk -->|"No"| PostApocalyptic["Post-apocalyptic?"]
+    
+    WantFuture -->|"Yes"| Wells["H.G. Wells - The Time Machine"]
+    WantFuture -->|"No"| NearFuture["Near future?"]
+    
+    VirusSpace -->|"Hmm... no"| JustSpace["Just space then?"]
+    VirusSpace -->|"Yes"| Crichton["Michael Crichton - The Andromeda Strain"]
+    
+    JustSpace -->|"Yes"| Clarke["Arthur C. Clarke - Rendezvous with Rama"]
+    JustSpace -->|"No"| LoveFallout["Love Fallout?"]
+    
+    AlreadyRead -->|"Yes"| WhatRead["What did you read?"]
+    AlreadyRead -->|"No"| Adams["Douglas Adams - The Hitchhiker's Guide to the Galaxy"]
+    
+    WhatRead -->|"Liked it"| MoreSimilar["Want more similar books?"]
+    WhatRead -->|"Hated it"| TryDifferent["Try something completely different"]
+    
+    NearFuture -->|"Yes"| Dick1["Philip K. Dick - Do Androids Dream of Electric Sheep?"]
+    NearFuture -->|"No"| SciFiMags["Science fiction magazines?"]
+    
+    PostApocalyptic -->|"Yes"| McCarthy["Cormac McCarthy - The Road"]
+    PostApocalyptic -->|"No"| TimeTravel["Time travel?"]
+    
+    LoveFallout -->|"Yes"| Miller["Walter M. Miller - A Canticle for Leibowitz"]
+    LoveFallout -->|"No"| SovietHumor["Like post-Soviet humor?"]
+    
+    SovietHumor -->|"Yes"| Strugatsky["Arkady & Boris Strugatsky - Hard to Be a God"]
+    SovietHumor -->|"No"| OpenWorld["Open world?"]
+    
+    OpenWorld -->|"Yes"| Stephenson["Neal Stephenson - Snow Crash"]
+    OpenWorld -->|"No"| CommunicationIssues["Communication issues?"]
+    
+    CommunicationIssues -->|"Yes"| Lem1["Stanisław Lem - Solaris"]
+    CommunicationIssues -->|"No"| DeathFear["Fear of death?"]
+    
+    DeathFear -->|"Yes"| Pohl["Frederik Pohl - Gateway"]
+    DeathFear -->|"No"| LongBooks["Prefer longer books?"]
+    
+    LongBooks -->|"Yes"| Simmons["Dan Simmons - Hyperion"]
+    LongBooks -->|"No"| Card["Orson Scott Card - Ender's Game"]
