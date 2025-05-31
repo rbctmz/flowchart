@@ -46,7 +46,7 @@ const Flowchart = () => {
       {result.cover && (
         <div className="book-cover-container">
           <img 
-            src={result.cover || placeholderCover}
+            src={result.cover || '/covers/placeholder.jpg'}
             alt={`Обложка книги ${result.text}`} 
             className="book-cover"
             onError={(e) => {
