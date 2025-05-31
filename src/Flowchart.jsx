@@ -852,6 +852,7 @@ const Flowchart = () => {
   };
 
   // Обновляем стили для обложки
+  // renderResult will now only render the content specific to the result, not the navigation buttons
   const renderResult = (result) => (
     <div className="result-content">
       <h2>{result.text}</h2>
@@ -915,24 +916,7 @@ const Flowchart = () => {
           </ul>
         </div>
       )}
-      <div className="navigation-buttons">
-        <button
-          onClick={goBack}
-          className="back-button"
-          disabled={history.length === 0}
-        >
-          ← Назад
-        </button>
-        <button
-          onClick={() => {
-            setCurrentNode('start');
-            setHistory([]);
-          }}
-          className="restart-button"
-        >
-          Начать заново
-        </button>
-      </div>
+      {/* The navigation-buttons div below has been removed as it's now handled by the common <NavigationButtons /> component */}
     </div>
   );
 
@@ -952,11 +936,32 @@ const Flowchart = () => {
     </div>
   );
 
+  const NavigationButtons = () => (
+    <div className="navigation-buttons">
+      <button
+        onClick={goBack}
+        className="back-button"
+        disabled={history.length === 0}
+      >
+        ← Назад
+      </button>
+      <button
+        onClick={() => {
+          setCurrentNode('start');
+          setHistory([]);
+        }}
+        className="restart-button"
+      >
+        Начать заново
+      </button>
+    </div>
+  );
+
   return (
     <div className="flowchart-container">
       <div className={
-        current.type === 'question' ? 'question-box' : 
-        current.type === 'timer' ? 'timer-box' : 
+        current.type === 'question' ? 'question-box' :
+        current.type === 'timer' ? 'timer-box' :
         'result-box'
       }>
         {current.type === 'question' ? (
@@ -978,9 +983,12 @@ const Flowchart = () => {
         ) : current.type === 'timer' ? (
           renderTimer(current)
         ) : (
+          // renderResult has been modified to not include these buttons
           renderResult(current)
         )}
       </div>
+      {/* Render navigation buttons for question and result types */}
+      {current.type !== 'timer' && <NavigationButtons />}
     </div>
   );
 };
